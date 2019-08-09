@@ -3,12 +3,75 @@
  */
 package bitmap.transformer;
 
+import com.sun.prism.Image;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        //https://www.javatpoint.com/command-line-argument
+//        System.out.println(" " + args[0] + " " + args[1] + " " + args[2]);
+        Redd();
+        Greenn();
+    }
+    public static void Redd() {
+        //https://stackoverflow.com/questions/23234306/how-to-edit-the-pixels-in-a-bufferedimage
+        File bmpFile = new File("./src/main/resources/Coffee.bmp");
+        try{
+            BufferedImage image = ImageIO.read(bmpFile);
+            System.out.println(image);
+            for (int x = 0; x < image.getWidth(); x++){
+                for(int y = 0; y < image.getHeight(); y++) {
+                    Color newColor = new Color(240, 240, 240);
+                    int RGB = image.getRGB(x, y)>>16&0xFF;
+                    int R = RGB&0xFF;
+                    int G = RGB>>8&0xFF;
+                    int B = RGB>>16&0xFF;
+                    R += 50;
+                    if (R > 255) {
+                        R = 255;
+                    }
+                    image.setRGB(x, y, new Color(R, G, B).getRGB());
+                }
+            }
+            ImageIO.write(image, "BMP", new File("./src/main/resources/redcoffee.bmp"));
+        }
+
+        catch(IOException e) {
+            System.err.println(e);
+        }
+    }
+    public static void Greenn() {
+        //https://stackoverflow.com/questions/23234306/how-to-edit-the-pixels-in-a-bufferedimage
+        File bmpFile = new File("./src/main/resources/Coffee.bmp");
+        try{
+            BufferedImage image = ImageIO.read(bmpFile);
+            System.out.println(image);
+            for (int x = 0; x < image.getWidth(); x++){
+                for(int y = 0; y < image.getHeight(); y++) {
+                    Color newColor = new Color(240, 240, 240);
+                    int RGB = image.getRGB(x, y)>>16&0xFF;
+                    int R = RGB&0xFF;
+                    int G = RGB>>8&0xFF;
+                    int B = RGB>>16&0xFF;
+                    G += 128;
+                    if (G > 255) {
+                        G = 255;
+                    }
+                    image.setRGB(x, y, new Color(R, G, B).getRGB());
+                }
+            }
+            ImageIO.write(image, "BMP", new File("./src/main/resources/greencoffee.bmp"));
+        }
+
+        catch(IOException e) {
+            System.err.println(e);
+        }
     }
 }
+
