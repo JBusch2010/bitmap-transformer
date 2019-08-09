@@ -15,7 +15,7 @@ public class App {
 
     public static void main(String[] args) {
         //https://www.javatpoint.com/command-line-argument
-//        System.out.println(" " + args[0] + " " + args[1] + " " + args[2]);
+        System.out.println(" " + args[0] + " " + args[1] + " " + args[2]);
         Redd();
         Greenn();
     }
